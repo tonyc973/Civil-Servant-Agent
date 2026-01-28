@@ -1,10 +1,10 @@
-# 🟢 Agentic Gov
+# 🟢 Civil Servant Agent
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit)
 ![AI-Powered](https://img.shields.io/badge/AI-Agentic%20Workflow-success?style=for-the-badge)
 
-**Agentic Gov** is an AI-powered interface designed to modernize bureaucratic processes. It acts as an intelligent layer between citizens and government forms, converting natural conversation into structured data and automatically generating filled PDF applications.
+**Civil Servant Agent** is an AI-powered interface designed to modernize bureaucratic processes. It acts as an intelligent layer between citizens and government forms, converting natural conversation into structured data and automatically generating filled PDF applications.
 
 ---
 
