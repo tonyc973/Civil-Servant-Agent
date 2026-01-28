@@ -1,0 +1,9 @@
+[theme]
+primaryColor = "#2563EB"       # Enterprise Blue (Tailwind-like)
+backgroundColor = "#F3F4F6"    # Light Gray Background (Easy on eyes)
+secondaryBackgroundColor = "#FFFFFF" # White Sidebar/Cards
+textColor = "#1F2937"          # Dark Gray text (Not harsh black)
+font = "sans serif"
+
+[server]
+headless = true

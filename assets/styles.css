@@ -1,0 +1,140 @@
+/* --- GLOBAL RESET & FONTS --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Hide Streamlit Default Branding */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;} 
+
+/* --- MAIN LAYOUT --- */
+.stApp {
+    background-color: #F3F4F6;
+}
+
+/* --- CUSTOM HEADER --- */
+.custom-header {
+    background-color: #FFFFFF;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #E5E7EB;
+    margin-top: -60px; /* Pull up to cover streamlit padding */
+    margin-left: -5rem;
+    margin-right: -5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.header-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-badge {
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- CHAT INTERFACE (LEFT PANEL) --- */
+.stChatMessage {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* User Message Bubble */
+div[data-testid="stChatMessage"]:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+div[data-testid="stChatMessage"]:nth-child(odd) .stMarkdown {
+    background-color: #2563EB;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 18px 18px 4px 18px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Agent Message Bubble */
+div[data-testid="stChatMessage"]:nth-child(even) .stMarkdown {
+    background-color: #FFFFFF;
+    color: #374151;
+    padding: 12px 18px;
+    border-radius: 18px 18px 18px 4px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Avatar Styling */
+.stChatMessageAvatar {
+    background-color: #EFF6FF;
+    border: 1px solid #DBEAFE;
+}
+
+/* --- AUDITOR DASHBOARD (RIGHT PANEL) --- */
+.dashboard-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.metric-label {
+    font-size: 0.875rem;
+    color: #6B7280;
+    font-weight: 500;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* --- FORM FIELDS VISUALIZATION --- */
+.form-field-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.form-field-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-field-value {
+    font-family: 'Monaco', 'Consolas', monospace;
+    font-size: 0.85rem;
+    background-color: #F9FAFB;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #111827;
+    border: 1px solid #E5E7EB;
+}
+
+.status-waiting { color: #9CA3AF; font-style: italic; }
+.status-filled { color: #059669; font-weight: 600; }
+
+/* --- SIDEBAR --- */
+section[data-testid="stSidebar"] {
+    background-color: #FFFFFF;
+    border-right: 1px solid #E5E7EB;
+}
