@@ -3,6 +3,7 @@ import time
 from src.agent import UniversalAgent
 from src.services import SERVICES
 from src.pdf_handler import PDFHandler
+from src.vision import extract_data_from_image
 
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="Agentic Gov", page_icon="🟢", layout="wide")
@@ -36,6 +37,10 @@ def switch_service():
 if not st.session_state.chat_history:
     switch_service()
 
+# --- MAIN HEADER ---
+# We define current_config early so we can use it in the sidebar
+current_config = SERVICES[st.session_state.current_service]
+
 # --- SIDEBAR ---
 with st.sidebar:
     st.markdown("### ⚙️ Procedure Selector")
@@ -61,11 +66,43 @@ with st.sidebar:
         switch_service()
         st.rerun()
 
+    st.markdown("---")
+    
+    # --- 📷 VISION SECTION (MOVED HERE) ---
+    with st.expander("📷 Scan Document / ID", expanded=False):
+        st.caption("Upload ID to auto-fill.")
+        uploaded_file = st.file_uploader("Upload Image", type=["jpg", "png", "jpeg"], label_visibility="collapsed")
+        
+        if uploaded_file:
+            if st.button("✨ Auto-Extract", use_container_width=True):
+                with st.spinner("Scanning..."):
+                    # Get requirements
+                    req_fields = current_config["required_fields"]
+                    
+                    # CALL VISION API
+                    raw_data = extract_data_from_image(uploaded_file, req_fields)
+                    
+                    # SANITIZATION
+                    clean_data = {k: v for k, v in raw_data.items() if k in req_fields and v is not None}
+
+                    if clean_data:
+                        st.session_state.form_data.update(clean_data)
+                        
+                        readable_labels = [req_fields[k] for k in clean_data.keys()]
+                        
+                        st.session_state.chat_history.append(
+                            ("assistant", f"✅ I've scanned your document and updated: **{', '.join(readable_labels)}**.")
+                        )
+                        st.success(f"Extracted {len(clean_data)} fields!")
+                        time.sleep(1) 
+                        st.rerun()
+                    else:
+                        st.warning("No matching fields found.")
+
     st.divider()
     st.info("System Status: Online 🟢")
 
-# --- MAIN HEADER ---
-current_config = SERVICES[st.session_state.current_service]
+# --- MAIN BODY START ---
 st.markdown(f"## 🟢 Agentic Core | {current_config['name']}")
 
 # --- DUAL VIEW LAYOUT ---
@@ -93,28 +130,28 @@ with col_chat:
             )
             time.sleep(0.3) 
             
-        # 3. HANDLE RESPONSE (The Logic Fix)
-        
-        # A. Update Data first (if any)
+        # 3. HANDLE RESPONSE
         if response.get("extracted"):
-            st.session_state.form_data.update(response["extracted"])
+            valid_updates = {k: v for k, v in response["extracted"].items() if k in current_config["required_fields"]}
+            st.session_state.form_data.update(valid_updates)
             
-        # B. Save Agent Message to History
         msg = response.get("message", "I didn't understand.")
         st.session_state.chat_history.append(("assistant", msg))
-        
-        # C. Force Rerun (NOW it is safe, because history is saved)
         st.rerun()
 
 # === RIGHT PANEL: DASHBOARD ===
 with col_dash:
     st.subheader("📋 Live Case File")
+
+    # (Vision section removed from here)
     
-    # Progress Bar
+    # --- 📊 PROGRESS BAR ---
     req_fields = current_config["required_fields"]
-    filled = len(st.session_state.form_data)
+    
+    # Logic Correction
+    filled = sum(1 for key in req_fields if st.session_state.form_data.get(key))
     total = len(req_fields)
-    progress = min(filled/total, 1.0)
+    progress = min(filled/total, 1.0) if total > 0 else 0
     
     c1, c2 = st.columns([1, 3])
     c1.metric("Fields", f"{filled}/{total}")
@@ -142,7 +179,7 @@ with col_dash:
         st.rerun()
         
     # Generate PDF Logic
-    if filled > 0:
+    if filled > 0: 
         if b2.button("🖨️ Generate PDF", type="primary"):
             success = st.session_state.pdf_handler.fill_form(
                 data=st.session_state.form_data, 
