@@ -14,7 +14,7 @@
 
 ## ✨ Key Features
 
-* **🧠 Universal AI Agent:** A smart conversationalist that understands intent and extracts entities from natural language to fill complex forms.
+* **🧠 Universal AI Agent with Multimodal Capabilities:** A smart conversationalist that understands intent and extracts entities from natural language and images to fill complex forms.
 * **⚡ Live Case File:** A real-time dashboard that updates instantly as the user chats, visualizing completed fields and pending requirements.
 * **📂 Multi-Service Support:** Dynamically switch between procedures (e.g., *Identity Card*, *Passport*, *Driver's License*) with context retention.
 * **📄 Automated PDF Generation:** Maps extracted data directly to official government PDF templates using a robust backend handler.
