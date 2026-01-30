@@ -32,7 +32,7 @@
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/agentic-gov.git](https://github.com/YOUR_USERNAME/agentic-gov.git)
+    git clone [https://github.com/tonyc973/agentic-gov.git](https://github.com/tonyc973/agentic-gov.git)
     cd agentic-gov
     ```
 
@@ -43,7 +43,7 @@
 
 3.  **Run the application**
     ```bash
-    streamlit run main.py
+    streamlit run app.py
     ```
 
 ---
