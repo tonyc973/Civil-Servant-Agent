@@ -1,48 +1,105 @@
-# src/services.py
+# src/services.py — Extended Service Registry
 
 SERVICES = {
     "identity_card": {
         "name": "Identity Card Issue (14yo)",
+        "icon": "🪪",
         "description": "Application for the first Identity Card issuance for minors.",
         "template_file": "template_id.pdf",
         "pdf_enabled": True,
+        "estimated_time": "3–5 business days",
         "required_fields": {
-            "LastName": "Family Name", 
-            "FirstName": "First Name", 
+            "LastName": "Family Name",
+            "FirstName": "First Name",
             "CNP": "Personal Numerical Code (CNP)",
-            "FatherName": "Father's First Name", 
-            "MotherName": "Mother's First Name", 
-            "City": "City / Sector", 
-            "Street": "Street Name", 
-            "Number": "Street Number"
-        }
+            "FatherName": "Father's First Name",
+            "MotherName": "Mother's First Name",
+            "City": "City / Sector",
+            "Street": "Street Name",
+            "Number": "Street Number",
+        },
     },
     "passport_renewal": {
         "name": "Passport Renewal Application",
+        "icon": "📘",
         "description": "Application to renew an expired electronic passport.",
         "template_file": "template_passport.pdf",
         "pdf_enabled": True,
+        "estimated_time": "5–10 business days",
         "required_fields": {
             "LastName": "Current Family Name",
             "FirstName": "First Name",
             "PassportNo": "Old Passport Number",
             "ExpiryDate": "Old Expiry Date (DD/MM/YYYY)",
             "CNP": "Personal Numerical Code",
-            "Reason": "Reason for Renewal"
-        }
+            "Reason": "Reason for Renewal",
+        },
     },
     "vehicle_registration": {
         "name": "Vehicle Registration Form",
+        "icon": "🚗",
         "description": "Registering a newly purchased vehicle.",
         "template_file": "template_vehicle.pdf",
         "pdf_enabled": True,
+        "estimated_time": "2–3 business days",
         "required_fields": {
             "OwnerName": "New Owner Name",
             "VIN": "Chassis Number (VIN)",
             "CarMake": "Car Brand (Make)",
             "CarModel": "Car Model",
             "ProductionYear": "Year of Production",
-            "Date": "Purchase Date"
-        }
-    }
+            "Date": "Purchase Date",
+        },
+    },
+    "birth_certificate": {
+        "name": "Birth Certificate Request",
+        "icon": "👶",
+        "description": "Request for an official birth certificate copy.",
+        "template_file": "template_birth.pdf",
+        "pdf_enabled": True,
+        "estimated_time": "1–2 business days",
+        "required_fields": {
+            "ChildLastName": "Child's Family Name",
+            "ChildFirstName": "Child's First Name",
+            "CNP": "Child's CNP",
+            "DateOfBirth": "Date of Birth (DD/MM/YYYY)",
+            "PlaceOfBirth": "Place of Birth",
+            "FatherName": "Father's Full Name",
+            "MotherName": "Mother's Full Name",
+            "RequestReason": "Reason for Request",
+        },
+    },
+    "marriage_certificate": {
+        "name": "Marriage Certificate Request",
+        "icon": "💍",
+        "description": "Official marriage certificate issuance or copy request.",
+        "template_file": "template_marriage.pdf",
+        "pdf_enabled": True,
+        "estimated_time": "2–3 business days",
+        "required_fields": {
+            "Spouse1LastName": "Spouse 1 Family Name",
+            "Spouse1FirstName": "Spouse 1 First Name",
+            "Spouse1CNP": "Spouse 1 CNP",
+            "Spouse2LastName": "Spouse 2 Family Name",
+            "Spouse2FirstName": "Spouse 2 First Name",
+            "Spouse2CNP": "Spouse 2 CNP",
+            "MarriageDate": "Date of Marriage (DD/MM/YYYY)",
+            "MarriageCity": "City of Marriage",
+        },
+    },
+    "fiscal_certificate": {
+        "name": "Fiscal Certificate (ANAF)",
+        "icon": "🧾",
+        "description": "Request for a tax compliance certificate from ANAF.",
+        "template_file": "template_fiscal.pdf",
+        "pdf_enabled": True,
+        "estimated_time": "1 business day",
+        "required_fields": {
+            "FullName": "Full Name",
+            "CNP": "Personal Numerical Code (CNP)",
+            "Address": "Registered Address",
+            "RequestDate": "Request Date (DD/MM/YYYY)",
+            "Purpose": "Purpose of Certificate",
+        },
+    },
 }
