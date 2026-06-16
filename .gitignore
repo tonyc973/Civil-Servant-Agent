@@ -4,3 +4,6 @@ __pycache__/
 .env
 .streamlit/secrets.toml
 *.pdf
+.pytest_cache/
+civil_servant.db
+.refactor_backup_20260524/

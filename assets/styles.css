@@ -1,140 +1,221 @@
-/* --- GLOBAL RESET & FONTS --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* assets/styles.css — Stilurile interfeței Agent Funcționar Public.
+   Încărcate la pornire de app.py prin src.ui.load_css(). */
 
-html, body, [class*="css"] {
-    font-family: 'Inter', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+html, body, [class*="css"], .stApp {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    background-color: #F8F9FC !important;
+    color: #0F172A !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility !important;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11' !important;
 }
 
-/* Hide Streamlit Default Branding */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;} 
+#MainMenu, footer, header { visibility: hidden !important; }
+.stDeployButton, [data-testid="stToolbar"] { display: none !important; }
 
-/* --- MAIN LAYOUT --- */
-.stApp {
-    background-color: #F3F4F6;
+/* Sidebar-ul conține meniul de selectare a procedurii (navigația principală).
+   Regula `header { visibility:hidden }` de mai sus ascundea și butonul de
+   redeschidere a sidebar-ului, așa că odată pliat nu mai putea fi recuperat.
+   1) Ascundem butonul de pliere → meniul nu poate dispărea la click.
+   2) Dacă totuși se pliază (scurtătură de tastatură), păstrăm vizibil
+      controlul de redeschidere. */
+[data-testid="stSidebarCollapseButton"] { display: none !important; }
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="collapsedControl"] {
+    visibility: visible !important;
+    display: flex !important;
+}
+.block-container { padding-top: 1.5rem !important; padding-bottom: 2rem !important; max-width: 1400px !important; }
+
+[data-testid="stSidebar"] {
+    background: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0 !important;
+    padding-top: 0 !important;
+}
+[data-testid="stSidebar"] > div { padding: 1.5rem 1rem !important; }
+
+.app-header { padding: 0 0 1.5rem 0; border-bottom: 2px solid #E2E8F0; margin-bottom: 1.75rem; }
+.app-title {
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif !important;
+    font-size: 2.4rem !important; font-weight: 400 !important; color: #0F172A !important;
+    letter-spacing: -0.03em; line-height: 1 !important; margin: 0 !important; padding: 0 !important; display: inline;
+}
+.app-title-icon { font-size: 2rem; margin-right: 10px; vertical-align: middle; }
+.badge-v2 {
+    display: inline-block;
+    background: linear-gradient(135deg, #2563EB, #7C3AED);
+    color: #FFFFFF !important; font-family: 'Inter', sans-serif !important;
+    font-size: 10px !important; font-weight: 700 !important; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+    vertical-align: middle; margin-left: 12px;
+}
+.app-sub { font-family: 'Inter', sans-serif !important; font-size: 0.82rem !important; color: #64748B !important; margin-top: 6px !important; font-weight: 400 !important; }
+
+.status-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #F0FDF4; border: 1px solid #BBF7D0; color: #16A34A;
+    font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 100px;
+    font-family: 'Inter', sans-serif; margin-bottom: 1.5rem;
+}
+.dot-green { width: 7px; height: 7px; background: #22C55E; border-radius: 50%; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.sidebar-label {
+    font-family: 'Inter', sans-serif !important; font-size: 10px !important;
+    font-weight: 700 !important; letter-spacing: 2px; text-transform: uppercase;
+    color: #94A3B8 !important; margin: 1.25rem 0 0.6rem 0; display: block;
 }
 
-/* --- CUSTOM HEADER --- */
-.custom-header {
-    background-color: #FFFFFF;
-    padding: 1.5rem 2rem;
-    border-bottom: 1px solid #E5E7EB;
-    margin-top: -60px; /* Pull up to cover streamlit padding */
-    margin-left: -5rem;
-    margin-right: -5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+.stButton > button {
+    width: 100% !important; text-align: left !important; padding: 10px 14px !important;
+    border-radius: 10px !important; font-family: 'Inter', sans-serif !important;
+    font-size: 0.85rem !important; font-weight: 500 !important; transition: all 0.15s ease !important;
+    background: #F8F9FC !important; border: 1px solid #E2E8F0 !important; color: #334155 !important;
+}
+.stButton > button:hover { background: #EFF6FF !important; border-color: #BFDBFE !important; color: #2563EB !important; }
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #2563EB, #1D4ED8) !important; border-color: transparent !important;
+    color: #FFFFFF !important; font-weight: 600 !important; box-shadow: 0 2px 8px rgba(37,99,235,0.25) !important;
+}
+.stButton > button[kind="primary"]:hover {
+    background: linear-gradient(135deg, #1D4ED8, #1E40AF) !important;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.35) !important; color: #FFFFFF !important;
 }
 
-.header-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #111827;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.stTabs [data-baseweb="tab-list"] {
+    background: #F1F5F9 !important; border-radius: 12px !important;
+    padding: 4px !important; gap: 2px !important; border: none !important;
+}
+.stTabs [data-baseweb="tab"] {
+    background: transparent !important; color: #64748B !important; border-radius: 9px !important;
+    font-family: 'Inter', sans-serif !important; font-size: 0.83rem !important;
+    font-weight: 500 !important; padding: 7px 16px !important; border: none !important;
+}
+.stTabs [data-baseweb="tab"]:hover { color: #0F172A !important; background: rgba(255,255,255,0.7) !important; }
+.stTabs [aria-selected="true"] {
+    background: #FFFFFF !important; color: #2563EB !important;
+    font-weight: 600 !important; box-shadow: 0 1px 4px rgba(0,0,0,0.1) !important;
 }
 
-.header-badge {
-    background-color: #DBEAFE;
-    color: #1E40AF;
-    font-size: 0.75rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+[data-testid="stChatMessage"] {
+    background: #FFFFFF !important; border: 1px solid #E2E8F0 !important;
+    border-radius: 14px !important; padding: 14px 16px !important;
+    margin-bottom: 10px !important; box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+}
+[data-testid="stChatMessage"] p { color: #0F172A !important; font-family: 'Inter', sans-serif !important; font-size: 0.9rem !important; line-height: 1.6 !important; }
+[data-testid="stChatMessage"] strong { color: #2563EB !important; }
+
+[data-testid="stChatInput"] {
+    border: 2px solid #E2E8F0 !important; border-radius: 14px !important;
+    background: #FFFFFF !important; font-family: 'Inter', sans-serif !important; transition: border-color 0.2s !important;
+}
+[data-testid="stChatInput"]:focus-within { border-color: #2563EB !important; box-shadow: 0 0 0 3px rgba(37,99,235,0.1) !important; }
+
+.stProgress > div > div { background: #EFF6FF !important; border-radius: 100px !important; height: 8px !important; }
+.stProgress > div > div > div { background: linear-gradient(90deg, #2563EB, #7C3AED) !important; border-radius: 100px !important; }
+
+[data-testid="stMetric"] { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+[data-testid="stMetricLabel"] p { color: #64748B !important; font-size: 0.75rem !important; font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; }
+[data-testid="stMetricValue"] { color: #0F172A !important; font-size: 1.5rem !important; font-weight: 700 !important; }
+
+.field-row { display: flex; align-items: center; padding: 11px 0; border-bottom: 1px solid #F1F5F9; gap: 12px; }
+.field-label { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; color: #64748B; width: 180px; flex-shrink: 0; }
+.field-filled { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; color: #16A34A; background: #F0FDF4; border: 1px solid #BBF7D0; padding: 3px 10px; border-radius: 6px; }
+.field-empty { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #CBD5E1; font-style: italic; }
+
+.agent-card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 16px; margin-bottom: 12px; transition: box-shadow 0.2s; }
+.agent-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.agent-name { font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 600; color: #0F172A; }
+.agent-role { font-size: 0.75rem; color: #2563EB; font-weight: 500; margin: 3px 0; }
+.agent-tool { font-family: 'Courier New', monospace; font-size: 0.72rem; background: #F1F5F9; color: #475569; padding: 2px 7px; border-radius: 4px; display: inline-block; margin: 4px 0; }
+.agent-desc { font-size: 0.76rem; color: #94A3B8; margin-top: 4px; }
+
+.log-console { background: #0F172A; border-radius: 12px; padding: 14px 16px; font-family: 'Courier New', monospace; font-size: 0.73rem; max-height: 180px; overflow-y: auto; border: 1px solid #1E293B; }
+.log-ok    { color: #4ADE80; display: block; margin: 2px 0; }
+.log-info  { color: #60A5FA; display: block; margin: 2px 0; }
+.log-warn  { color: #FCD34D; display: block; margin: 2px 0; }
+.log-err   { color: #F87171; display: block; margin: 2px 0; }
+
+.section-title { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.25rem; color: #0F172A; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 1rem; }
+
+[data-testid="stDownloadButton"] > button {
+    background: linear-gradient(135deg, #2563EB, #1D4ED8) !important;
+    color: white !important; border: none !important; border-radius: 10px !important;
+    font-weight: 600 !important; font-size: 0.88rem !important; padding: 10px 20px !important;
+    box-shadow: 0 2px 8px rgba(37,99,235,0.3) !important;
 }
 
-/* --- CHAT INTERFACE (LEFT PANEL) --- */
-.stChatMessage {
-    background-color: transparent;
-    border: none;
-    padding: 0;
+/* ── Vault specific ─────────────────────────────────────────────────────── */
+.vault-drop-zone {
+    border: 2px dashed #BFDBFE;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #EFF6FF 0%, #F8FAFF 100%);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
 }
+.vault-drop-zone:hover { border-color: #2563EB; background: #EFF6FF; }
 
-/* User Message Bubble */
-div[data-testid="stChatMessage"]:nth-child(odd) {
-    flex-direction: row-reverse;
-}
-div[data-testid="stChatMessage"]:nth-child(odd) .stMarkdown {
-    background-color: #2563EB;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 18px 18px 4px 18px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-/* Agent Message Bubble */
-div[data-testid="stChatMessage"]:nth-child(even) .stMarkdown {
-    background-color: #FFFFFF;
-    color: #374151;
-    padding: 12px 18px;
-    border-radius: 18px 18px 18px 4px;
-    border: 1px solid #E5E7EB;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
-/* Avatar Styling */
-.stChatMessageAvatar {
-    background-color: #EFF6FF;
-    border: 1px solid #DBEAFE;
-}
-
-/* --- AUDITOR DASHBOARD (RIGHT PANEL) --- */
-.dashboard-card {
-    background-color: #FFFFFF;
+.vault-doc-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid #E5E7EB;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-.metric-label {
-    font-size: 0.875rem;
-    color: #6B7280;
-    font-weight: 500;
-}
-
-.metric-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #111827;
-}
-
-/* --- FORM FIELDS VISUALIZATION --- */
-.form-field-row {
+    padding: 14px 16px;
+    margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+}
+.vault-doc-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+
+.vault-field-chip {
+    display: inline-block;
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    color: #15803D;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin: 2px 3px 2px 0;
+}
+.vault-field-chip-key {
+    color: #6B7280;
+    font-weight: 400;
+    font-size: 0.68rem;
+}
+
+.vault-empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    border: 2px dashed #E2E8F0;
+    border-radius: 16px;
+    background: #FAFBFC;
+}
+
+.autofill-banner {
+    background: linear-gradient(135deg, #EFF6FF, #F5F3FF);
+    border: 1px solid #BFDBFE;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 1.25rem;
+    display: flex;
     align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #F3F4F6;
+    gap: 14px;
 }
 
-.form-field-label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #374151;
+.vault-stat {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
 }
-
-.form-field-value {
-    font-family: 'Monaco', 'Consolas', monospace;
-    font-size: 0.85rem;
-    background-color: #F9FAFB;
-    padding: 4px 8px;
-    border-radius: 4px;
-    color: #111827;
-    border: 1px solid #E5E7EB;
-}
-
-.status-waiting { color: #9CA3AF; font-style: italic; }
-.status-filled { color: #059669; font-weight: 600; }
-
-/* --- SIDEBAR --- */
-section[data-testid="stSidebar"] {
-    background-color: #FFFFFF;
-    border-right: 1px solid #E5E7EB;
-}
+.vault-stat-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 2rem; font-weight: 600; color: #0F172A; }
+.vault-stat-label { font-size: 0.72rem; color: #94A3B8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
