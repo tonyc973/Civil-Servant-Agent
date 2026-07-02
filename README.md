@@ -10,7 +10,7 @@
 
 ## 📸 Interface
 
-![Dashboard Screenshot](agent_image.png)
+![Dashboard Screenshot](agentic_ui_image.png)
 
 ## ✨ Key Features
 
